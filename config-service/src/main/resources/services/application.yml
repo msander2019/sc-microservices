@@ -1,0 +1,21 @@
+# этот файл будет родительским для других файлов конфигураций (общая часть)
+# hystrix - предохранитель вызовов между сервисами
+# eureka - registry (discovery-service) от Netflix
+logging:
+  level:
+    org.springframework.security: INFO
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

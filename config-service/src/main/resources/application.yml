@@ -1,0 +1,19 @@
+# этот application.yml будет относится непосрелственно к самому config-service
+# /services - локация, где будут лежать файлы конфигураций
+# профили - по умолчанию
+# security: user/admin
+# port по которому можно будет найти конфиг-сервис - 8001 (каждый сервис должен знать этот порт чтобы получить свои настройки)
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/services
+  profiles:
+    active: native
+  security:
+    user:
+      password: admin
+
+server:
+  port: 8001

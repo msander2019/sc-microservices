@@ -5,7 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ua.kyiv.mesharea.bill.controller.dto.BillRequestDTO;
 import ua.kyiv.mesharea.bill.controller.dto.BillResponceDTO;
+import ua.kyiv.mesharea.bill.entity.Bill;
 import ua.kyiv.mesharea.bill.service.BillService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class BillController {
@@ -41,5 +45,13 @@ public class BillController {
     @DeleteMapping("/{billId}")
     public BillResponceDTO deleteBill(@PathVariable Long billId) {
         return new BillResponceDTO(billService.deleteBill(billId));
+    }
+
+    @GetMapping("/account/{accountId}")
+    public List<BillResponceDTO> getBillsByAccountId(@PathVariable Long accountId) {
+        return billService.getBillsByAccountId(accountId)
+                .stream()
+                .map(BillResponceDTO::new)
+                .collect(Collectors.toList());
     }
 }
